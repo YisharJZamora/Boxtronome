@@ -87,16 +87,20 @@ Ese workflow:
 - instala dependencias con `npm ci`
 - ejecuta los tests
 - genera el build Angular con el `base-href` correcto para GitHub Pages
-- publica `dist/Boxtronome/browser` usando las acciones oficiales de GitHub Pages
+- publica `dist/Boxtronome/browser` en la rama `gh-pages`
 
-### 1. Activar GitHub Pages con GitHub Actions
+### 1. Activar GitHub Pages desde la rama `gh-pages`
 
 En GitHub:
 
 1. Ve a **Settings**.
 2. Entra en **Pages**.
-3. En **Build and deployment**, selecciona **Source: GitHub Actions**.
-4. Guarda los cambios.
+3. En **Build and deployment**, selecciona **Source: Deploy from a branch**.
+4. Elige la rama **`gh-pages`**.
+5. Elige la carpeta **`/ (root)`**.
+6. Guarda los cambios.
+
+> Este paso suele hacerse una sola vez.
 
 ### 2. Hacer push a `master`
 
@@ -127,7 +131,7 @@ git commit -m "Actualiza Boxtronome"
 git push origin master
 ```
 
-GitHub Actions publicará automáticamente la nueva versión.
+GitHub Actions publicará automáticamente la nueva versión en `gh-pages`.
 
 ## Estructura relevante para la PWA
 
@@ -140,4 +144,5 @@ GitHub Actions publicará automáticamente la nueva versión.
 ## Notas
 
 - El workflow calcula automáticamente el `base-href` a partir del nombre del repositorio.
+- Si GitHub Pages no estaba activado, primero configura la fuente a `gh-pages` una vez en Settings → Pages.
 - Como ahora las fuentes e iconos son locales, la aplicación no depende de CDNs externos para renderizarse correctamente sin conexión.
