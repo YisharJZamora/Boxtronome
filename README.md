@@ -86,7 +86,7 @@ Ese workflow:
 - se ejecuta automáticamente al hacer `push` a la rama `master`
 - instala dependencias con `npm ci`
 - ejecuta los tests
-- genera el build Angular con el `base-href` correcto para GitHub Pages
+- genera el build Angular con el `base-href` correcto para GitHub Pages.
 - publica `dist/Boxtronome/browser` en la rama `gh-pages`
 
 ### 1. Activar GitHub Pages desde la rama `gh-pages`
