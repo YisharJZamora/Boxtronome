@@ -1,0 +1,174 @@
+/* Toolbar */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.toolbar-icon { font-size: 1.5rem; margin-right: 8px; }
+.toolbar-title { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+.toolbar-sub { font-size: 0.85rem; opacity: 0.8; }
+.spacer { flex: 1; }
+
+/* App container */
+.app-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 8px 80px;
+}
+
+/* Tab content */
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+/* Control cards */
+.control-card {
+  border-radius: 12px !important;
+}
+.control-card mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+/* Difficulty toggles */
+.difficulty-group {
+  width: 100%;
+  display: flex;
+}
+.difficulty-group .diff-toggle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  padding: 8px 4px;
+}
+.difficulty-hint {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
+
+/* BPM Slider */
+.bpm-slider { width: 100%; }
+.bpm-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Generate row */
+.generate-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+.generate-btn { min-width: 180px; }
+
+/* Combo steps grid */
+.combo-card { border-radius: 12px !important; }
+.steps-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px 0;
+}
+.step-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 8px 12px;
+  min-width: 80px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: default;
+  border: 2px solid transparent;
+}
+.step-punch    { background: #FFEBEE; border-color: #EF9A9A; }
+.step-dodge    { background: #E3F2FD; border-color: #90CAF9; }
+.step-footwork { background: #E8F5E9; border-color: #A5D6A7; }
+.step-active {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  border-color: #FF6F00 !important;
+  background: #FFF9C4 !important;
+}
+.step-number { font-size: 0.65rem; color: #999; font-weight: 600; }
+.step-emoji  { font-size: 1.6rem; line-height: 1.2; }
+.step-name   { font-size: 0.75rem; font-weight: 600; text-align: center; }
+.step-en     { font-size: 0.65rem; color: #888; text-align: center; }
+.step-figure {
+  font-size: 1rem;
+  line-height: 1;
+  margin-top: 2px;
+  font-family: 'Segoe UI Symbol', 'Noto Music', serif;
+  color: #555;
+  letter-spacing: -0.05em;
+}
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 16px;
+  color: #888;
+  text-align: center;
+}
+.empty-icon { font-size: 3rem; }
+
+/* Favorites */
+.fav-badge {
+  background: #E53935;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+}
+.tab-icon { margin-right: 4px; }
+.fav-list { padding: 0; }
+.fav-item { height: auto !important; padding: 10px 0; }
+.fav-selected { background: #FFF3E0; border-radius: 8px; }
+.fav-content { display: flex; align-items: center; width: 100%; gap: 8px; }
+.fav-info { flex: 1; display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
+.fav-title { font-weight: 600; font-size: 0.9rem; }
+.fav-steps { display: flex; flex-wrap: wrap; gap: 2px; }
+.mini-step { font-size: 1.1rem; }
+.fav-date { font-size: 0.75rem; color: #888; }
+.fav-actions { display: flex; gap: 4px; }
+
+/* Legend */
+.legend-content h3 { margin: 16px 0 8px; color: #444; }
+.legend-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 100px;
+  gap: 4px;
+  text-align: center;
+}
+.legend-item span { font-size: 1.8rem; }
+.legend-item strong { font-size: 0.85rem; }
+.legend-item small { font-size: 0.7rem; color: #666; }
+.legend-item.punch    { background: #FFEBEE; }
+.legend-item.dodge    { background: #E3F2FD; }
+.legend-item.footwork { background: #E8F5E9; }
+
