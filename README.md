@@ -1,59 +1,143 @@
 # Boxtronome
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Boxtronome es una aplicación Angular para entrenamiento de boxeo en saco:
 
-## Development server
+- genera combos aleatorios por nivel
+- asigna figuras musicales a cada acción
+- reproduce el combo al BPM elegido
+- incluye metrónomo
+- guarda favoritos en `localStorage`
+- funciona como **PWA instalable** con **soporte offline completo** tras la primera carga
 
-To start a local development server, run:
+## Requisitos
 
-```bash
-ng serve
+- Node.js 20+
+- npm 10+
+
+## Desarrollo local
+
+Inicia el servidor de desarrollo:
+
+```powershell
+cd C:\Users\Usuario\WebstormProjects\Boxtronome
+npm install
+npx ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Abre después:
 
-## Code scaffolding
+- `http://localhost:4200/`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Tests
 
-```bash
-ng generate component component-name
+Ejecuta la suite unitaria con Vitest:
+
+```powershell
+cd C:\Users\Usuario\WebstormProjects\Boxtronome
+npx ng test --watch=false
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Build de producción
 
-```bash
-ng generate --help
+Genera la versión optimizada:
+
+```powershell
+cd C:\Users\Usuario\WebstormProjects\Boxtronome
+npx ng build
 ```
 
-## Building
+## PWA y modo offline
 
-To build the project run:
+La app está configurada como PWA con:
 
-```bash
-ng build
+- `manifest.webmanifest`
+- service worker de Angular
+- caché de shell y assets estáticos
+- fuentes e iconos cargados localmente, sin dependencia de Google Fonts/CDN
+
+### Cómo probar el modo offline
+
+1. Haz un build de producción.
+2. Sirve la carpeta generada con un servidor estático.
+3. Abre la app una vez online.
+4. Recarga y después desactiva la red desde DevTools.
+5. La app debería seguir funcionando offline.
+
+Ejemplo de prueba local con servidor estático:
+
+```powershell
+cd C:\Users\Usuario\WebstormProjects\Boxtronome
+npx ng build
+npx http-server .\dist\Boxtronome\browser -p 8080 -c-1
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Después abre:
 
-## Running unit tests
+- `http://localhost:8080/`
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+> Nota: el service worker solo se registra en builds de producción.
 
-```bash
-ng test
+## Despliegue automático en GitHub Pages
+
+El repositorio incluye el workflow `/.github/workflows/deploy-pages.yml`.
+
+Ese workflow:
+
+- se ejecuta automáticamente al hacer `push` a la rama `master`
+- instala dependencias con `npm ci`
+- ejecuta los tests
+- genera el build Angular con el `base-href` correcto para GitHub Pages
+- publica `dist/Boxtronome/browser` usando las acciones oficiales de GitHub Pages
+
+### 1. Activar GitHub Pages con GitHub Actions
+
+En GitHub:
+
+1. Ve a **Settings**.
+2. Entra en **Pages**.
+3. En **Build and deployment**, selecciona **Source: GitHub Actions**.
+4. Guarda los cambios.
+
+### 2. Hacer push a `master`
+
+Una vez subido el workflow, cada push a `master` desplegará automáticamente la aplicación.
+
+```powershell
+cd C:\Users\Usuario\WebstormProjects\Boxtronome
+git add .
+git commit -m "Configura despliegue automático en GitHub Pages"
+git push origin master
 ```
 
-## Running end-to-end tests
+### 3. URL final esperada
 
-For end-to-end (e2e) testing, run:
+Si tu usuario es `TU_USUARIO` y el repo es `Boxtronome`, la URL será:
 
-```bash
-ng e2e
+```text
+https://TU_USUARIO.github.io/Boxtronome/
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Flujo recomendado para publicar actualizaciones
 
-## Additional Resources
+```powershell
+cd C:\Users\Usuario\WebstormProjects\Boxtronome
+npx ng test --watch=false
+git add .
+git commit -m "Actualiza Boxtronome"
+git push origin master
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+GitHub Actions publicará automáticamente la nueva versión.
+
+## Estructura relevante para la PWA
+
+- `src/app/app.config.ts` → registro del service worker
+- `ngsw-config.json` → estrategia de caché offline
+- `public/manifest.webmanifest` → manifest de instalación
+- `public/icons/` → iconos instalables
+- `angular.json` → activación de service worker en producción
+
+## Notas
+
+- El workflow calcula automáticamente el `base-href` a partir del nombre del repositorio.
+- Como ahora las fuentes e iconos son locales, la aplicación no depende de CDNs externos para renderizarse correctamente sin conexión.
