@@ -48,7 +48,6 @@ export class AudioService {
       'pull-back':    () => this.playTone(700, 80,  'sine', 0.2),
       'step':         () => this.playTone(200, 100, 'sine', 0.3),
       'step-around':  () => { this.playTone(200, 80, 'sine', 0.3, 0); this.playTone(250, 80, 'sine', 0.3, 0.08); },
-      'step-in-out':  () => { this.playTone(250, 80, 'sine', 0.3, 0); this.playTone(180, 80, 'sine', 0.3, 0.1); },
     };
     sounds[actionId]?.();
   }

@@ -1,6 +1,8 @@
 import { ComboGeneratorService } from './combo-generator.service';
 import { DIFFICULTY_RANGES, Difficulty } from '../models/boxing.models';
 
+type StrikeSide = 'left' | 'right';
+
 describe('ComboGeneratorService', () => {
   const service = new ComboGeneratorService();
   const difficulties: Difficulty[] = ['beginner', 'intermediate', 'advanced'];
@@ -74,5 +76,65 @@ describe('ComboGeneratorService', () => {
       }
     }
   });
+
+  it('should respect tactical X/Y limits and side constraints for punches', () => {
+    for (const difficulty of difficulties) {
+      for (let i = 0; i < 100; i++) {
+        const combo = service.generateCombo(difficulty, 90);
+
+        let x = 1;
+        let y = 0;
+        let pendingPunchSide: StrikeSide | null = null;
+        let consecutiveMovements = 0;
+
+        for (const step of combo.steps) {
+          if (step.action.category === 'punch') {
+            // Must be at striking range
+            expect(x).toBe(1);
+
+            // Must match the required side if one was pending
+            if (pendingPunchSide) {
+              expect(getPunchSide(step.action.id)).toBe(pendingPunchSide);
+            }
+
+            pendingPunchSide = null;
+            consecutiveMovements = 0;
+          } else {
+            // No more than 2 movements in a row
+            consecutiveMovements++;
+            expect(consecutiveMovements).toBeLessThanOrEqual(2);
+          }
+
+          if (step.action.id === 'step') {
+            if (step.cue === 'Atrás')    x += 1;
+            if (step.cue === 'Adelante') x -= 1;
+          }
+
+          if (step.action.id === 'step-around') {
+            if (step.cue === 'Derecha')   { y += 1; pendingPunchSide = 'right'; }
+            if (step.cue === 'Izquierda') { y -= 1; pendingPunchSide = 'left'; }
+          }
+
+          if (step.action.id === 'slip' || step.action.id === 'bob-weave') {
+            if (step.cue === 'Derecha')   pendingPunchSide = 'right';
+            if (step.cue === 'Izquierda') pendingPunchSide = 'left';
+          }
+
+          expect(x).toBeGreaterThanOrEqual(1);
+          expect(x).toBeLessThanOrEqual(2);
+          expect(y).toBeGreaterThanOrEqual(-1);
+          expect(y).toBeLessThanOrEqual(1);
+        }
+      }
+    }
+  });
 });
+
+function getPunchSide(actionId: string): StrikeSide {
+  if (['cross', 'hook-r', 'uppercut-r'].includes(actionId)) {
+    return 'right';
+  }
+
+  return 'left';
+}
 

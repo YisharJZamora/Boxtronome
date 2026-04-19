@@ -99,9 +99,11 @@
                       'step-footwork': step.action.category === 'footwork'
                     }">
                     <span class="step-number">{{ step.beat }}</span>
-                    <span class="step-emoji">{{ step.action.emoji }}</span>
+                    <span class="step-emoji">{{ step.directionEmoji ?? step.action.emoji }}</span>
                     <span class="step-name">{{ step.action.name }}</span>
-                    <span class="step-en">{{ step.action.nameEn }}</span>
+                    @if (step.cue && step.action.category !== 'punch') {
+                      <span class="step-cue">{{ step.cue }}</span>
+                    }
                     <span class="step-figure" [matTooltip]="step.figure.nameEs">{{ step.figure.symbol }}</span>
                   </div>
                 }
@@ -210,7 +212,6 @@
         <div class="legend-grid">
           <div class="legend-item footwork"><span>👣</span><strong>Paso</strong><small>Step – desplazamiento básico</small></div>
           <div class="legend-item footwork"><span>↩️</span><strong>Paso Lateral</strong><small>Step-around</small></div>
-          <div class="legend-item footwork"><span>↕️</span><strong>Entrada/Salida</strong><small>Step-in / Step-out</small></div>
         </div>
       </div>
     </mat-tab>

@@ -38,6 +38,8 @@ export interface ComboStep {
   action: BoxingAction;
   beat: number;           // Ordinal position in the combo
   figure: MusicalFigure;  // Rhythmic value of this step
+  cue?: string;           // Optional execution cue (e.g., Derecha, Izquierda, Atrás)
+  directionEmoji?: string; // Directional icon derived from cue + action
 }
 
 export interface Combo {
@@ -61,7 +63,6 @@ export const BOXING_ACTIONS: BoxingAction[] = [
   { id: 'pull-back',  name: 'Pull Back',      nameEn: 'Pull Back',    category: 'dodge',    emoji: '⬅️', color: '#00ACC1' },
   { id: 'step',       name: 'Paso',           nameEn: 'Step',         category: 'footwork', emoji: '👣', color: '#43A047' },
   { id: 'step-around',name: 'Paso Lateral',   nameEn: 'Step Around',  category: 'footwork', emoji: '↩️', color: '#388E3C' },
-  { id: 'step-in-out',name: 'Entrada/Salida', nameEn: 'Step In/Out',  category: 'footwork', emoji: '↕️', color: '#2E7D32' },
 ];
 
 export const COMBO_TRANSITIONS: Record<ActionCategory, ActionCategory[]> = {

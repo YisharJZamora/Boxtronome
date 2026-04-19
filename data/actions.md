@@ -34,4 +34,3 @@ El *footwork* es lo que permite posicionarse para golpear y salir de la zona de 
 | :--- | :--- |:---------------------------------------------------------------------------------------|:--------------------------------------------------------------|
 | **Paso Plano** | Step | Desplazamiento manteniendo la distancia entre pies.                                    | Movilidad básica adelante o atrás.                            |
 | **Paso Lateral** | Step-around | Paso rápido hacia un lado mientras se gira el cuerpo.                                  | Salir de la línea de ataque frontal del oponente.             |
-| **Entrada y Salida** | Step-in / Step-out | Saltos cortos y explosivos hacia adelante o atrás, acompañado o precedido de un golpe. | Acortar distancia para golpear, o golpear y huir rápidamente. |
