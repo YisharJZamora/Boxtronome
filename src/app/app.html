@@ -16,30 +16,19 @@
 
         <!-- Difficulty Selector -->
         <mat-card class="control-card">
-          <mat-card-header>
-            <mat-card-title>
-              <mat-icon>tune</mat-icon> Nivel de Dificultad
-            </mat-card-title>
-          </mat-card-header>
           <mat-card-content>
-            <mat-button-toggle-group
-              [value]="difficulty()"
-              (change)="difficulty.set($event.value)"
-              class="difficulty-group">
-              @for (d of difficulties; track d.value) {
-                <mat-button-toggle [value]="d.value" class="diff-toggle">
-                  <mat-icon>{{ d.icon }}</mat-icon>
-                  <span>{{ d.label }}</span>
-                </mat-button-toggle>
-              }
-            </mat-button-toggle-group>
-            <div class="difficulty-hint">
-              @switch (difficulty()) {
-                @case ('beginner')     { <span>2 – 5 acciones</span> }
-                @case ('intermediate') { <span>5 – 9 acciones</span> }
-                @case ('advanced')     { <span>9 – 14 acciones</span> }
-              }
-            </div>
+            <mat-form-field appearance="outline" class="difficulty-field">
+              <mat-label><mat-icon>tune</mat-icon> Nivel de Dificultad</mat-label>
+              <mat-select [value]="difficulty()" (selectionChange)="difficulty.set($event.value)">
+                @for (d of difficulties; track d.value) {
+                  <mat-option [value]="d.value">
+                    <mat-icon>{{ d.icon }}</mat-icon>
+                    {{ d.label }}
+                    <span class="option-hint">{{ difficultyHint(d.value) }}</span>
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
           </mat-card-content>
         </mat-card>
 

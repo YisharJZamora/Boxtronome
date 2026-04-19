@@ -8,7 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -28,7 +29,7 @@ import { StorageService } from './services/storage.service';
   imports: [
     FormsModule, NgClass, DatePipe,
     MatToolbarModule, MatButtonModule, MatIconModule, MatCardModule,
-    MatSliderModule, MatButtonToggleModule, MatChipsModule, MatTooltipModule,
+    MatSliderModule, MatSelectModule, MatFormFieldModule, MatChipsModule, MatTooltipModule,
     MatBadgeModule, MatDividerModule, MatSnackBarModule, MatTabsModule, MatListModule,
   ],
   templateUrl: './app.html',
@@ -112,6 +113,15 @@ export class App implements OnDestroy {
 
   beatDuration(bpm: number): string {
     return ((60 / bpm) * 1000).toFixed(0) + ' ms';
+  }
+
+  difficultyHint(d: Difficulty): string {
+    const hints: Record<Difficulty, string> = {
+      beginner:     '2 – 5 acciones',
+      intermediate: '5 – 9 acciones',
+      advanced:     '9 – 14 acciones',
+    };
+    return hints[d];
   }
 
   ngOnDestroy(): void {

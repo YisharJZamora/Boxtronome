@@ -173,3 +173,10 @@
 .legend-item.dodge    { background: #E3F2FD; }
 .legend-item.footwork { background: #E8F5E9; }
 
+/* Difficulty dropdown */
+.difficulty-field { width: 100%; }
+.option-hint {
+  font-size: 0.72rem;
+  color: #888;
+  margin-left: 6px;
+}
